@@ -1,10 +1,7 @@
 <script setup>
 import {RouterView} from 'vue-router'
 import {ElMenu, ElMenuItem} from 'element-plus'
-import {ref} from "vue";
 import router from "@/router";
-
-const activeIndex = ref('1')
 
 const redirectTo = (route) => {
   router.push(route);
@@ -14,17 +11,20 @@ const redirectTo = (route) => {
 <template>
   <header>
     <el-menu
-        :default-active="activeIndex"
+        :default-active="router.currentRoute.value.path"
         class="el-menu-demo"
         mode="horizontal"
         :ellipsis="false"
     >
-      <el-menu-item index="0" @click="redirectTo('/')">
+      <el-menu-item :index="router.getRoutes()[0].path" @click="redirectTo('/')">
         Home
       </el-menu-item>
       <div class="flex-grow"/>
-      <el-menu-item index="1" @click="redirectTo('/about')">
-        About
+      <el-menu-item :index="router.getRoutes()[1].path" @click="redirectTo('/login')">
+        Sign in
+      </el-menu-item>
+      <el-menu-item :index="router.getRoutes()[2].path" @click="redirectTo('/register')">
+        Sign up
       </el-menu-item>
     </el-menu>
   </header>
