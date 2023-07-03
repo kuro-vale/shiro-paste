@@ -1,13 +1,11 @@
 <script setup>
 import {ElAvatar, ElBreadcrumb, ElBreadcrumbItem, ElCard} from "element-plus";
 import {ArrowRight} from '@element-plus/icons-vue'
-import hljs from 'highlight.js'
 import CodeEditor from 'simple-code-editor'
 
 defineProps({
   paste: Object
 });
-hljs.highlightAll()
 </script>
 
 <template>
