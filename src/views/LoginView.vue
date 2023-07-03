@@ -1,9 +1,11 @@
 <script setup>
+import {onMounted} from "vue";
 
+onMounted(() => document.title = 'Login')
 </script>
 
 <template>
-Login
+  Login
 </template>
 
 <style scoped>
