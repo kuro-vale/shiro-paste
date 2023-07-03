@@ -1,6 +1,6 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import {ElContainer, ElHeader, ElMain, ElFooter, ElLoading, ElEmpty} from "element-plus";
+import {ElContainer, ElEmpty, ElFooter, ElHeader, ElLoading, ElMain} from "element-plus";
 import PasteCard from "@/components/PasteCard.vue";
 
 onMounted(() => document.title = 'shiro-paste')
@@ -15,6 +15,7 @@ async function fetchData() {
   pastes.value = await res.json()
   loader.close()
 }
+
 fetchData()
 </script>
 
@@ -23,7 +24,7 @@ fetchData()
     <el-header><h1>Latest Pastes</h1></el-header>
     <el-main style="align-self: center">
       <PasteCard v-for="paste in pastes?.items" :key="paste.id" :paste="paste"></PasteCard>
-      <el-empty :image-size="200" v-if="!(pastes?.items?.length > 0)" />
+      <el-empty v-if="!(pastes?.items?.length > 0)" :image-size="200"/>
     </el-main>
     <el-footer>
 

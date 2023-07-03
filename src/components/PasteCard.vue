@@ -1,24 +1,33 @@
 <script setup>
-import {ElCard, ElAvatar, ElBreadcrumb, ElBreadcrumbItem} from "element-plus";
+import {ElAvatar, ElBreadcrumb, ElBreadcrumbItem, ElCard} from "element-plus";
 import {ArrowRight} from '@element-plus/icons-vue'
+import hljs from 'highlight.js'
+import CodeEditor from 'simple-code-editor'
 
 defineProps({
   paste: Object
 });
+hljs.highlightAll()
 </script>
 
 <template>
   <el-card class="card">
     <template #header>
       <div class="card-header">
-        <el-avatar :src="'https://robohash.org/' + paste.created_by.username + '?set=set4'"></el-avatar>
+        <el-avatar :src="'https://robohash.org/' + paste['created_by']['username']+ '?set=set4'"></el-avatar>
         <el-breadcrumb :separator-icon="ArrowRight" class="card-breadcrumb">
-          <el-breadcrumb-item>{{ paste.created_by.username }}</el-breadcrumb-item>
-          <el-breadcrumb-item>{{ paste.filename }}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ paste['created_by']['username'] }}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ paste['filename'] }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </template>
-    <highlightjs languague="python" :code="paste.body" class="code"></highlightjs>
+    <CodeEditor :languages="[['python'], ['text']]"
+                :line-nums="true"
+                :read-only="true"
+                :value="paste['body']"
+                border-radius="0"
+                theme="github"
+    ></CodeEditor>
   </el-card>
 </template>
 

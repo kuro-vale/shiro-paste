@@ -12,7 +12,6 @@ const redirectTo = (route) => {
   <header>
     <el-menu
         :default-active="router.currentRoute.value.path"
-        class="el-menu-demo"
         mode="horizontal"
         :ellipsis="false"
     >
