@@ -9,7 +9,7 @@ const redirectTo = (route) => {
 </script>
 
 <template>
-  <header>
+  <nav>
     <el-menu
         :default-active="router.currentRoute.value.path"
         mode="horizontal"
@@ -20,13 +20,13 @@ const redirectTo = (route) => {
       </el-menu-item>
       <div class="flex-grow"/>
       <el-menu-item :index="router.getRoutes()[1].path" @click="redirectTo('/login')">
-        Sign in
+        Login
       </el-menu-item>
       <el-menu-item :index="router.getRoutes()[2].path" @click="redirectTo('/register')">
-        Sign up
+        Register
       </el-menu-item>
     </el-menu>
-  </header>
+  </nav>
 
   <RouterView/>
 </template>
