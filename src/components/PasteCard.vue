@@ -6,6 +6,10 @@ import CodeEditor from 'simple-code-editor'
 defineProps({
   paste: Object
 });
+function setLanguage() {
+  // todo
+  return [['text']];
+}
 </script>
 
 <template>
@@ -19,12 +23,14 @@ defineProps({
         </el-breadcrumb>
       </div>
     </template>
-    <CodeEditor :languages="[['python'], ['text']]"
+    <CodeEditor :languages="setLanguage()"
                 :line-nums="true"
                 :read-only="true"
                 :value="paste['body']"
                 border-radius="0"
                 theme="github"
+                max-height="280px"
+                width="75vw"
     ></CodeEditor>
   </el-card>
 </template>
