@@ -1,46 +1,98 @@
 <script setup>
 import {ElButton, ElCheckbox, ElForm, ElFormItem, ElInput} from "element-plus";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 
-defineProps({
+const props = defineProps({
   withConfirmation: Boolean
 })
 
-const formLogin = reactive({
+const emit = defineEmits(['submit'])
+
+const userForm = reactive({
   username: '',
   password: '',
   confirmPassword: '',
   stayLogged: false,
 })
+
+const userFormRef = ref()
+
+const validatePassword = (rule, value, callback) => {
+  if (!props.withConfirmation) callback()
+  if (userForm.confirmPassword !== '') {
+    userFormRef.value.validateField('confirmPassword', () => null)
+  }
+  callback()
+}
+const validateConfirmPassword = (rule, value, callback) => {
+  if (value !== userForm.password) {
+    callback('Password confirmation doesn\'t match')
+  }
+  callback()
+}
+
+const rules = reactive({
+  username: [
+    {required: true, trigger: 'blur', message: 'Please input the username'},
+    {whitespace: true, trigger: 'blur', message: 'Username cannot be empty'},
+    {min: 2, trigger: 'blur', message: 'Username must have at least 2 characters'}
+  ],
+  password: [
+    {required: true, trigger: 'blur', message: 'Please input the password'},
+    {validator: validatePassword, trigger: 'blur'}
+  ],
+  confirmPassword: [
+    {required: true, trigger: 'blur', message: 'Please input the password again'},
+    {validator: validateConfirmPassword, trigger: 'blur'}
+  ]
+})
+
+const loading = ref(false)
+
+async function submitForm(form) {
+  const isValid = await form.validate(() => null)
+  if (!isValid) return
+  loading.value = true
+  emit('submit', userForm)
+}
 </script>
 
 <template>
   <el-form
-      :model="formLogin"
+      ref="userFormRef"
+      :model="userForm"
+      :rules="rules"
       class="form"
       label-position="top"
   >
-    <el-form-item label="Username">
-      <el-input v-model="formLogin.username"></el-input>
+    <el-form-item label="Username" prop="username">
+      <el-input v-model="userForm.username"></el-input>
     </el-form-item>
-    <el-form-item label="Password">
+    <el-form-item label="Password" prop="password">
       <el-input
-          v-model="formLogin.password"
+          v-model="userForm.password"
           show-password
           type="password"
       ></el-input>
     </el-form-item>
-    <el-form-item v-if="withConfirmation" label="Confirm password">
+    <el-form-item v-if="withConfirmation" label="Confirm password" prop="confirmPassword">
       <el-input
-          v-model="formLogin.confirmPassword"
+          v-model="userForm.confirmPassword"
           show-password
           type="password"
       ></el-input>
     </el-form-item>
     <el-form-item>
-      <el-checkbox v-model="formLogin.stayLogged" label="Stay logged"></el-checkbox>
+      <el-checkbox v-model="userForm.stayLogged" label="Stay logged"></el-checkbox>
     </el-form-item>
-    <el-button :loading="false" style="width: 100%" type="primary">Login</el-button>
+    <el-form-item>
+      <el-button :loading="loading"
+                 style="width: 100%"
+                 type="primary"
+                 @click="submitForm(userFormRef)"
+      >Login
+      </el-button>
+    </el-form-item>
   </el-form>
 </template>
 
