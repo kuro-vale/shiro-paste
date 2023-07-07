@@ -8,6 +8,12 @@ const props = defineProps({
 
 const emit = defineEmits(['submit'])
 
+const loading = ref(false)
+
+defineExpose({
+  loading
+})
+
 const userForm = reactive({
   username: '',
   password: '',
@@ -39,6 +45,7 @@ const rules = reactive({
   ],
   password: [
     {required: true, trigger: 'blur', message: 'Please input the password'},
+    {min: 2, trigger: 'blur', message: 'Password must have at least 2 characters'},
     {validator: validatePassword, trigger: 'blur'}
   ],
   confirmPassword: [
@@ -47,7 +54,6 @@ const rules = reactive({
   ]
 })
 
-const loading = ref(false)
 
 async function submitForm(form) {
   const isValid = await form.validate(() => null)
@@ -66,13 +72,14 @@ async function submitForm(form) {
       label-position="top"
   >
     <el-form-item label="Username" prop="username">
-      <el-input v-model="userForm.username"></el-input>
+      <el-input v-model="userForm.username" @keydown.enter="submitForm(userFormRef)"></el-input>
     </el-form-item>
     <el-form-item label="Password" prop="password">
       <el-input
           v-model="userForm.password"
           show-password
           type="password"
+          @keydown.enter="submitForm(userFormRef)"
       ></el-input>
     </el-form-item>
     <el-form-item v-if="withConfirmation" label="Confirm password" prop="confirmPassword">
@@ -80,6 +87,7 @@ async function submitForm(form) {
           v-model="userForm.confirmPassword"
           show-password
           type="password"
+          @keydown.enter="submitForm(userFormRef)"
       ></el-input>
     </el-form-item>
     <el-form-item>
@@ -90,7 +98,8 @@ async function submitForm(form) {
                  style="width: 100%"
                  type="primary"
                  @click="submitForm(userFormRef)"
-      >Login
+      >
+        <slot></slot>
       </el-button>
     </el-form-item>
   </el-form>

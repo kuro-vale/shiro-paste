@@ -2,16 +2,17 @@
 import {onMounted, ref} from "vue";
 import {ElContainer, ElEmpty, ElFooter, ElHeader, ElLoading, ElMain} from "element-plus";
 import PasteCard from "@/components/PasteCard.vue";
+import {API_URL} from "@/constants";
 
 onMounted(() => document.title = 'shiro-paste')
 
-const API_URL = `${import.meta.env.VITE_API}/pastes`
+const URL = `${API_URL}/pastes`
 const pastes = ref(null);
 
 async function fetchData() {
   const loader = ElLoading.service()
   pastes.value = null
-  const res = await fetch(API_URL)
+  const res = await fetch(URL)
   pastes.value = await res.json()
   loader.close()
 }
