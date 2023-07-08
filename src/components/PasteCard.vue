@@ -2,6 +2,7 @@
 import {ElAvatar, ElBreadcrumb, ElBreadcrumbItem, ElCard} from "element-plus";
 import {ArrowRight} from '@element-plus/icons-vue'
 import CodeEditor from 'simple-code-editor'
+import hljs from "highlight.js";
 
 defineProps({
   paste: Object

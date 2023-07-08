@@ -6,6 +6,7 @@ import SocialsFooter from "@/components/SocialsFooter.vue";
 import {API_URL, JWT_KEY} from "@/constants";
 import router from "@/router";
 import {triggerNotification} from "@/utils";
+import {useStore} from "vuex";
 
 onMounted(() => document.title = 'Login')
 
@@ -16,6 +17,8 @@ const formRef = ref()
 const redirectTo = (route) => {
   router.push(route);
 }
+
+const store = useStore()
 
 async function login(request) {
   const response = await fetch(URL, {
@@ -37,6 +40,7 @@ async function login(request) {
   } else {
     sessionStorage.setItem(JWT_KEY, token)
   }
+  store.commit('setCurrentUser')
   redirectTo('/')
 }
 </script>
