@@ -1,41 +1,41 @@
 <script setup>
-import {ElButton, ElCheckbox, ElForm, ElFormItem, ElInput} from "element-plus";
-import {reactive, ref} from "vue";
+import {ElButton, ElCheckbox, ElForm, ElFormItem, ElInput} from 'element-plus';
+import {reactive, ref} from 'vue';
 
 const props = defineProps({
   withConfirmation: Boolean
-})
+});
 
-const emit = defineEmits(['submit'])
+const emit = defineEmits(['submit']);
 
-const loading = ref(false)
+const loading = ref(false);
 
 defineExpose({
   loading
-})
+});
 
 const userForm = reactive({
   username: '',
   password: '',
   confirmPassword: '',
   stayLogged: false,
-})
+});
 
-const userFormRef = ref()
+const userFormRef = ref();
 
 const validatePassword = (rule, value, callback) => {
-  if (!props.withConfirmation) callback()
+  if (!props.withConfirmation) callback();
   if (userForm.confirmPassword !== '') {
-    userFormRef.value.validateField('confirmPassword', () => null)
+    userFormRef.value.validateField('confirmPassword', () => null);
   }
-  callback()
-}
+  callback();
+};
 const validateConfirmPassword = (rule, value, callback) => {
   if (value !== userForm.password) {
-    callback('Password confirmation doesn\'t match')
+    callback('Password confirmation doesn\'t match');
   }
-  callback()
-}
+  callback();
+};
 
 const rules = reactive({
   username: [
@@ -52,14 +52,14 @@ const rules = reactive({
     {required: true, trigger: 'blur', message: 'Please input the password again'},
     {validator: validateConfirmPassword, trigger: 'blur'}
   ]
-})
+});
 
 
 async function submitForm(form) {
-  const isValid = await form.validate(() => null)
-  if (!isValid) return
-  loading.value = true
-  emit('submit', userForm)
+  const isValid = await form.validate(() => null);
+  if (!isValid) return;
+  loading.value = true;
+  emit('submit', userForm);
 }
 </script>
 

@@ -1,10 +1,10 @@
 <script setup>
-import {onMounted} from "vue";
-import {ElContainer, ElHeader, ElMain} from "element-plus";
-import UserForm from "@/components/UserForm.vue";
-import SocialsFooter from "@/components/SocialsFooter.vue";
+import {onMounted} from 'vue';
+import {ElContainer, ElHeader, ElMain} from 'element-plus';
+import UserForm from '@/components/UserForm.vue';
+import SocialsFooter from '@/components/SocialsFooter.vue';
 
-onMounted(() => document.title = 'Register')
+onMounted(() => document.title = 'Register');
 </script>
 
 <template>

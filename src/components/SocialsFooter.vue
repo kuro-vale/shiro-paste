@@ -1,5 +1,5 @@
 <script setup>
-import {ElFooter} from "element-plus";
+import {ElFooter} from 'element-plus';
 </script>
 
 <template>

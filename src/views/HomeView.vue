@@ -1,23 +1,23 @@
 <script setup>
-import {onMounted, ref} from "vue";
-import {ElContainer, ElEmpty, ElFooter, ElHeader, ElLoading, ElMain} from "element-plus";
-import PasteCard from "@/components/PasteCard.vue";
-import {API_URL} from "@/constants";
+import {onMounted, ref} from 'vue';
+import {ElContainer, ElEmpty, ElFooter, ElHeader, ElLoading, ElMain} from 'element-plus';
+import PasteCard from '@/components/PasteCard.vue';
+import {API_URL} from '@/constants';
 
-onMounted(() => document.title = 'shiro-paste')
+onMounted(() => document.title = 'shiro-paste');
 
-const URL = `${API_URL}/pastes`
+const URL = `${API_URL}/pastes`;
 const pastes = ref(null);
 
 async function fetchData() {
-  const loader = ElLoading.service()
-  pastes.value = null
-  const res = await fetch(URL)
-  pastes.value = await res.json()
-  loader.close()
+  const loader = ElLoading.service();
+  pastes.value = null;
+  const res = await fetch(URL);
+  pastes.value = await res.json();
+  loader.close();
 }
 
-fetchData()
+fetchData();
 </script>
 
 <template>
