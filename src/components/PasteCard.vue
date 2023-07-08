@@ -1,7 +1,9 @@
+<!--suppress ES6UnusedImports -->
 <script setup>
 import {ElAvatar, ElBreadcrumb, ElBreadcrumbItem, ElCard} from 'element-plus';
 import {ArrowRight} from '@element-plus/icons-vue';
 import CodeEditor from 'simple-code-editor';
+// eslint-disable-next-line no-unused-vars
 import hljs from 'highlight.js';
 
 defineProps({
@@ -30,8 +32,8 @@ function setLanguage() {
                 :read-only="true"
                 :value="paste['body']"
                 border-radius="0"
-                theme="github"
                 max-height="280px"
+                theme="github"
                 width="75vw"
     ></CodeEditor>
   </el-card>
