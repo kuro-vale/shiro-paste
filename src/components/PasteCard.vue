@@ -20,7 +20,7 @@ function setLanguage() {
   <el-card class="card">
     <template #header>
       <div class="card-header">
-        <el-avatar :src="'https://robohash.org/' + paste['created_by']['username']+ '?set=set4'"></el-avatar>
+        <el-avatar :src="'https://robohash.org/' + paste['created_by']['username'] + '?set=set4'"></el-avatar>
         <el-breadcrumb :separator-icon="ArrowRight" class="card-breadcrumb">
           <el-breadcrumb-item>{{ paste["created_by"]["username"] }}</el-breadcrumb-item>
           <el-breadcrumb-item>{{ paste["filename"] }}</el-breadcrumb-item>

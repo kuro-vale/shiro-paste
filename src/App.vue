@@ -1,6 +1,6 @@
 <script setup>
 import {RouterView} from "vue-router";
-import {ElMenu, ElMenuItem} from "element-plus";
+import {ElMenu, ElMenuItem, ElAvatar, ElText, ElSubMenu} from "element-plus";
 import router from "@/router";
 import {useStore} from "vuex";
 import {onMounted} from "vue";
@@ -22,15 +22,30 @@ onMounted(() => store.commit("setCurrentUser"));
         Home
       </el-menu-item>
       <div class="flex-grow"/>
-      <el-menu-item :index="router.getRoutes()[1].path" @click="redirectTo('/login')">
-        Login
-      </el-menu-item>
-      <el-menu-item :index="router.getRoutes()[2].path" @click="redirectTo('/register')">
-        Register
-      </el-menu-item>
-      <el-menu-item>
-        {{ store.state.currentUser?.username }}
-      </el-menu-item>
+      <!--    Logged tabs    -->
+      <template v-if="store.state.currentUser">
+        <el-sub-menu>
+          <template #title>
+            <el-avatar :src="'https://robohash.org/' + store.state.currentUser.username + '?set=set4'"/>
+            <el-text class="ml-10">{{ store.state.currentUser.username }}</el-text>
+          </template>
+          <el-menu-item>
+            Profile
+          </el-menu-item>
+          <el-menu-item>
+            Logout
+          </el-menu-item>
+        </el-sub-menu>
+      </template>
+      <!--   Anonymous tabs   -->
+      <template v-else>
+        <el-menu-item :index="router.getRoutes()[1].path" @click="redirectTo('/login')">
+          Login
+        </el-menu-item>
+        <el-menu-item :index="router.getRoutes()[2].path" @click="redirectTo('/register')">
+          Register
+        </el-menu-item>
+      </template>
     </el-menu>
   </nav>
 
@@ -40,5 +55,9 @@ onMounted(() => store.commit("setCurrentUser"));
 <style scoped>
 .flex-grow {
   flex-grow: 1;
+}
+
+.ml-10 {
+  margin-left: 10px;
 }
 </style>
