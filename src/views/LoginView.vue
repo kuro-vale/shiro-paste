@@ -3,7 +3,7 @@ import {ElContainer, ElHeader, ElMain} from "element-plus";
 import {onMounted, ref} from "vue";
 import UserForm from "@/components/UserForm.vue";
 import SocialsFooter from "@/components/SocialsFooter.vue";
-import {API_URL, JWT_KEY} from "@/constants";
+import {API_URL, JWT_KEY, PROFILE_ROUTE} from "@/constants";
 import {redirectTo, triggerNotification} from "@/utils";
 import {useStore} from "vuex";
 
@@ -34,7 +34,7 @@ async function login(request) {
     sessionStorage.setItem(JWT_KEY, token);
   }
   store.commit("setCurrentUser");
-  redirectTo("/");
+  redirectTo(PROFILE_ROUTE);
 }
 </script>
 

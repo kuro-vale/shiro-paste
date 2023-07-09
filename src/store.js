@@ -11,6 +11,11 @@ const store = createStore({
         setCurrentUser(state) {
             const token = sessionStorage.getItem(JWT_KEY) || localStorage.getItem(JWT_KEY);
             if (token) state.currentUser = jwtDecode(token);
+        },
+        logout(state) {
+            sessionStorage.clear();
+            localStorage.clear();
+            state.currentUser = null;
         }
     }
 });
