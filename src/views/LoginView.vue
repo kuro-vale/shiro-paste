@@ -4,20 +4,13 @@ import {onMounted, ref} from "vue";
 import UserForm from "@/components/UserForm.vue";
 import SocialsFooter from "@/components/SocialsFooter.vue";
 import {API_URL, JWT_KEY} from "@/constants";
-import router from "@/router";
-import {triggerNotification} from "@/utils";
+import {redirectTo, triggerNotification} from "@/utils";
 import {useStore} from "vuex";
 
 onMounted(() => document.title = "Login");
 
 const URL = `${API_URL}/auth/login`;
-
 const formRef = ref();
-
-const redirectTo = (route) => {
-  router.push(route);
-};
-
 const store = useStore();
 
 async function login(request) {

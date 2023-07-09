@@ -5,38 +5,28 @@ import {reactive, ref} from "vue";
 const props = defineProps({
   withConfirmation: Boolean
 });
-
 const emit = defineEmits(["submit"]);
-
 const loading = ref(false);
-
-defineExpose({
-  loading
-});
-
 const userForm = reactive({
   username: "",
   password: "",
-  confirmPassword: "",
-  stayLogged: false,
+  password_confirmation: "",
+  stayLogged: true,
 });
-
 const userFormRef = ref();
-
 const validatePassword = (rule, value, callback) => {
   if (!props.withConfirmation) callback();
-  if (userForm.confirmPassword !== "") {
-    userFormRef.value.validateField("confirmPassword", () => null);
+  if (userForm.password_confirmation !== "") {
+    userFormRef.value.validateField("password_confirmation", () => null);
   }
   callback();
 };
-const validateConfirmPassword = (rule, value, callback) => {
+const validate_password_confirmation = (rule, value, callback) => {
   if (value !== userForm.password) {
     callback("Password confirmation doesn't match");
   }
   callback();
 };
-
 const rules = reactive({
   username: [
     {required: true, trigger: "blur", message: "Please input the username"},
@@ -44,16 +34,19 @@ const rules = reactive({
     {min: 2, trigger: "blur", message: "Username must have at least 2 characters"}
   ],
   password: [
-    {required: true, trigger: "blur", message: "Please input the password"},
-    {min: 2, trigger: "blur", message: "Password must have at least 2 characters"},
-    {validator: validatePassword, trigger: "blur"}
+    {required: true, trigger: "change", message: "Please input the password"},
+    {min: 2, trigger: "change", message: "Password must have at least 2 characters"},
+    {validator: validatePassword, trigger: "change"}
   ],
-  confirmPassword: [
-    {required: true, trigger: "blur", message: "Please input the password again"},
-    {validator: validateConfirmPassword, trigger: "blur"}
+  password_confirmation: [
+    {required: true, trigger: "change", message: "Please input the password again"},
+    {validator: validate_password_confirmation, trigger: "change"}
   ]
 });
 
+defineExpose({
+  loading
+});
 
 async function submitForm(form) {
   const isValid = await form.validate(() => null);
@@ -82,9 +75,9 @@ async function submitForm(form) {
           @keydown.enter="submitForm(userFormRef)"
       ></el-input>
     </el-form-item>
-    <el-form-item v-if="withConfirmation" label="Confirm password" prop="confirmPassword">
+    <el-form-item v-if="withConfirmation" label="Confirm password" prop="password_confirmation">
       <el-input
-          v-model="userForm.confirmPassword"
+          v-model="userForm.password_confirmation"
           show-password
           type="password"
           @keydown.enter="submitForm(userFormRef)"

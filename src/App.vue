@@ -4,10 +4,8 @@ import {ElMenu, ElMenuItem} from "element-plus";
 import router from "@/router";
 import {useStore} from "vuex";
 import {onMounted} from "vue";
+import {redirectTo} from "@/utils";
 
-const redirectTo = (route) => {
-  router.push(route);
-};
 const store = useStore();
 
 onMounted(() => store.commit("setCurrentUser"));
