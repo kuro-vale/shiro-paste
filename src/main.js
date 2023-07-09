@@ -1,11 +1,11 @@
-import './assets/main.css';
+import "./assets/main.css";
 
-import {createApp} from 'vue';
-import App from './App.vue';
-import router from './router';
-import {createStore} from 'vuex';
-import {JWT_KEY} from '@/constants';
-import jwtDecode from 'jwt-decode';
+import {createApp} from "vue";
+import App from "./App.vue";
+import router from "./router";
+import {createStore} from "vuex";
+import {JWT_KEY} from "@/constants";
+import jwtDecode from "jwt-decode";
 
 const store = createStore({
     state() {
@@ -26,4 +26,4 @@ const app = createApp(App);
 app.use(router);
 app.use(store);
 
-app.mount('#app');
+app.mount("#app");

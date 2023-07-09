@@ -1,16 +1,16 @@
 <script setup>
-import {RouterView} from 'vue-router';
-import {ElMenu, ElMenuItem} from 'element-plus';
-import router from '@/router';
-import {useStore} from 'vuex';
-import {onMounted} from 'vue';
+import {RouterView} from "vue-router";
+import {ElMenu, ElMenuItem} from "element-plus";
+import router from "@/router";
+import {useStore} from "vuex";
+import {onMounted} from "vue";
 
 const redirectTo = (route) => {
   router.push(route);
 };
 const store = useStore();
 
-onMounted(() => store.commit('setCurrentUser'));
+onMounted(() => store.commit("setCurrentUser"));
 </script>
 
 <template>

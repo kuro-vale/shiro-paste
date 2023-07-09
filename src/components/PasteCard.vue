@@ -1,10 +1,10 @@
 <!--suppress ES6UnusedImports -->
 <script setup>
-import {ElAvatar, ElBreadcrumb, ElBreadcrumbItem, ElCard} from 'element-plus';
-import {ArrowRight} from '@element-plus/icons-vue';
-import CodeEditor from 'simple-code-editor';
+import {ElAvatar, ElBreadcrumb, ElBreadcrumbItem, ElCard} from "element-plus";
+import {ArrowRight} from "@element-plus/icons-vue";
+import CodeEditor from "simple-code-editor";
 // eslint-disable-next-line no-unused-vars
-import hljs from 'highlight.js';
+import hljs from "highlight.js";
 
 defineProps({
   paste: Object
@@ -12,7 +12,7 @@ defineProps({
 
 function setLanguage() {
   // todo
-  return [['text']];
+  return [["text"]];
 }
 </script>
 
@@ -22,8 +22,8 @@ function setLanguage() {
       <div class="card-header">
         <el-avatar :src="'https://robohash.org/' + paste['created_by']['username']+ '?set=set4'"></el-avatar>
         <el-breadcrumb :separator-icon="ArrowRight" class="card-breadcrumb">
-          <el-breadcrumb-item>{{ paste['created_by']['username'] }}</el-breadcrumb-item>
-          <el-breadcrumb-item>{{ paste['filename'] }}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ paste["created_by"]["username"] }}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ paste["filename"] }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </template>
