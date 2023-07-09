@@ -25,7 +25,7 @@ function logout() {
         :ellipsis="false"
         mode="horizontal"
     >
-      <el-menu-item :index="HOME_ROUTE" @click="redirectTo(HOME_ROUTE)">
+      <el-menu-item :index="HOME_ROUTE" @click="e => redirectTo(e.index)">
         Home
       </el-menu-item>
       <div class="flex-grow"/>
@@ -36,7 +36,7 @@ function logout() {
             <el-avatar :src="'https://robohash.org/' + store.state.currentUser.username + '?set=set4'"/>
             <el-text class="ml-10">{{ store.state.currentUser.username }}</el-text>
           </template>
-          <el-menu-item :index="PROFILE_ROUTE" @click="redirectTo(PROFILE_ROUTE)">
+          <el-menu-item :index="PROFILE_ROUTE" @click="e => redirectTo(e.index)">
             Profile
           </el-menu-item>
           <el-menu-item index="logout" @click="logout()">
@@ -46,10 +46,10 @@ function logout() {
       </template>
       <!--   Anonymous tabs   -->
       <template v-else>
-        <el-menu-item :index="LOGIN_ROUTE" @click="redirectTo(LOGIN_ROUTE)">
+        <el-menu-item :index="LOGIN_ROUTE" @click="e => redirectTo(e.index)">
           Login
         </el-menu-item>
-        <el-menu-item :index="REGISTER_ROUTE" @click="redirectTo(REGISTER_ROUTE)">
+        <el-menu-item :index="REGISTER_ROUTE" @click="e => redirectTo(e.index)">
           Register
         </el-menu-item>
       </template>
