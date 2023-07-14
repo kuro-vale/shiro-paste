@@ -25,7 +25,7 @@ fetchData();
     <el-header><h1>Latest Pastes</h1></el-header>
     <el-main class="centered">
       <PasteCard v-for="paste in pastes?.items" :key="paste.id" :paste="paste"></PasteCard>
-      <el-empty v-if="!(pastes?.items?.length > 0)" image-size="30vh"/>
+      <el-empty v-if="!(pastes?.items?.length > 0)" :image-size="200"/>
     </el-main>
     <el-footer>
 
