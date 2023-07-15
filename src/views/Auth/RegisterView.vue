@@ -45,7 +45,7 @@ async function register(request) {
     <el-main class="centered">
       <UserForm ref="formRef" :with-confirmation="true" @submit="(d) => register(d)">Register</UserForm>
     </el-main>
-    <SocialsFooter></SocialsFooter>
+    <SocialsFooter/>
   </el-container>
 </template>
 

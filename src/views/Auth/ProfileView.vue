@@ -84,7 +84,7 @@ getProfile();
         </template>
       </el-skeleton>
     </el-main>
-    <SocialsFooter></SocialsFooter>
+    <SocialsFooter/>
   </el-container>
 </template>
 

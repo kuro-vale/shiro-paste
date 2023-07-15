@@ -7,8 +7,10 @@ import {ElFooter} from "element-plus";
 </template>
 
 <style scoped>
-.bottom-footer {
-  bottom: 0;
-  position: absolute;
+@media (min-height: 700px) {
+  .bottom-footer {
+    bottom: 0;
+    position: absolute;
+  }
 }
 </style>

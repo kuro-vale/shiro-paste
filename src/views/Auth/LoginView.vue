@@ -44,7 +44,7 @@ async function login(request) {
     <el-main class="centered">
       <UserForm ref="formRef" :with-confirmation="false" @submit="(d) => login(d)">Login</UserForm>
     </el-main>
-    <SocialsFooter></SocialsFooter>
+    <SocialsFooter/>
   </el-container>
 </template>
 
