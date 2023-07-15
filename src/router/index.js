@@ -49,7 +49,7 @@ const router = createRouter({
             beforeEnter: (to, from, next) => {
                 if (authRoute()) next();
                 else next("/login");
-            }
+            },
         },
         {
             path: UNAUTHORIZED_ROUTE,
@@ -60,6 +60,10 @@ const router = createRouter({
             path: CREATE_ROUTE,
             name: "create",
             component: CreatePasteView,
+            beforeEnter: (to, from, next) => {
+                if (authRoute()) next();
+                else next("/login");
+            },
         }
     ]
 });

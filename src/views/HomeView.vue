@@ -5,11 +5,13 @@ import {Plus} from "@element-plus/icons-vue";
 import PasteCard from "@/components/PasteCard.vue";
 import {API_URL, CREATE_ROUTE} from "@/constants";
 import {redirectTo} from "@/utils";
+import {useStore} from "vuex";
 
 onMounted(() => document.title = "shiro-paste");
 
 const URL = `${API_URL}/pastes`;
 const pastes = ref(null);
+const store = useStore();
 
 async function fetchData() {
   const loader = ElLoading.service();
@@ -28,6 +30,7 @@ fetchData();
       <el-container style="justify-content: space-between">
         <h1>Latest Pastes</h1>
         <el-button
+            v-if="store.state.currentUser"
             :icon="Plus"
             circle
             class="centered"
