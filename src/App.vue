@@ -24,6 +24,7 @@ function logout() {
         :default-active="router.currentRoute.value.path"
         :ellipsis="false"
         mode="horizontal"
+        menu-trigger="click"
     >
       <el-menu-item :index="HOME_ROUTE" @click="e => redirectTo(e.index)">
         Home

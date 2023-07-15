@@ -11,7 +11,7 @@ import {
   ElDivider,
   ElSkeleton,
   ElSkeletonItem,
-  ElMessageBox
+  ElMessageBox, ElLoading
 } from "element-plus";
 import {useStore} from "vuex";
 import SocialsFooter from "@/components/SocialsFooter.vue";
@@ -49,6 +49,7 @@ function deleteUser() {
         type: "warning",
       }
   ).then(async () => {
+    const loader = ElLoading.service();
     const response = await fetch(URL, {
       method: "DELETE",
       headers: {
@@ -57,10 +58,12 @@ function deleteUser() {
     });
     if (response.ok) {
       store.commit("logout");
+      loader.close();
       redirectTo(HOME_ROUTE);
       triggerNotification("Success", "User deleted :(", "success");
     } else {
       const {message} = await response.json();
+      loader.close();
       triggerNotification("Error", message, "error");
     }
   }).catch(() => null);
