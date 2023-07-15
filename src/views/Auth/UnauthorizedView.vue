@@ -1,6 +1,6 @@
 <script setup>
 import {ElEmpty} from "element-plus";
-import logo from "../assets/unauthorized.jpg";
+import logo from "../../assets/unauthorized.jpg";
 </script>
 
 <template>

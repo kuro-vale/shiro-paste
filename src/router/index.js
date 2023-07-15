@@ -1,11 +1,12 @@
 import {createRouter, createWebHistory} from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import LoginView from "@/views/LoginView.vue";
-import RegisterView from "@/views/RegisterView.vue";
+import LoginView from "@/views/Auth/LoginView.vue";
+import RegisterView from "@/views/Auth/RegisterView.vue";
 import store from "@/store";
-import ProfileView from "@/views/ProfileView.vue";
-import UnauthorizedView from "@/views/UnauthorizedView.vue";
-import {HOME_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REGISTER_ROUTE, UNAUTHORIZED_ROUTE} from "@/constants";
+import ProfileView from "@/views/Auth/ProfileView.vue";
+import UnauthorizedView from "@/views/Auth/UnauthorizedView.vue";
+import {CREATE_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REGISTER_ROUTE, UNAUTHORIZED_ROUTE} from "@/constants";
+import CreatePasteView from "@/views/Pastes/CreatePasteView.vue";
 
 function anonymousRoute() {
     return !store.state.currentUser;
@@ -54,6 +55,11 @@ const router = createRouter({
             path: UNAUTHORIZED_ROUTE,
             name: "unauthorized",
             component: UnauthorizedView,
+        },
+        {
+            path: CREATE_ROUTE,
+            name: "create",
+            component: CreatePasteView,
         }
     ]
 });
