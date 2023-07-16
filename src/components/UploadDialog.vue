@@ -52,16 +52,14 @@ function onError(error, file) {
       </template>
     </el-upload>
     <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="opened = false">Cancel</el-button>
-        <el-button type="success" @click="submitUpload">Upload</el-button>
-      </span>
+      <el-button class="mr-10" @click="opened = false">Cancel</el-button>
+      <el-button type="success" @click="submitUpload">Upload</el-button>
     </template>
   </el-dialog>
 </template>
 
 <style scoped>
-.dialog-footer button:first-child {
+.mr-10 {
   margin-right: 10px;
 }
 </style>

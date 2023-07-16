@@ -9,6 +9,7 @@ import {
     CREATE_ROUTE,
     HOME_ROUTE,
     LOGIN_ROUTE,
+    NOT_FOUND_ROUTE,
     PROFILE_ROUTE,
     REGISTER_ROUTE,
     SHOW_PASTE_ROUTE,
@@ -16,6 +17,7 @@ import {
 } from "@/constants";
 import CreatePasteView from "@/views/Pastes/CreatePasteView.vue";
 import ShowPasteView from "@/views/Pastes/ShowPasteView.vue";
+import NotFoundView from "@/views/NotFoundView.vue";
 
 function anonymousRoute() {
     return !store.state.currentUser;
@@ -78,6 +80,11 @@ const router = createRouter({
             path: SHOW_PASTE_ROUTE,
             name: "show",
             component: ShowPasteView,
+        },
+        {
+            path: NOT_FOUND_ROUTE,
+            name: "Not found",
+            component: NotFoundView,
         },
     ]
 });

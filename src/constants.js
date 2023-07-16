@@ -7,3 +7,4 @@ export const PROFILE_ROUTE = "/profile";
 export const UNAUTHORIZED_ROUTE = "/unauthorized";
 export const CREATE_ROUTE = "/pastes/create";
 export const SHOW_PASTE_ROUTE = "/pastes/:id";
+export const NOT_FOUND_ROUTE = "/404";

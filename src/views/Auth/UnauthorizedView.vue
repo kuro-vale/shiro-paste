@@ -4,7 +4,7 @@ import logo from "../../assets/unauthorized.jpg";
 </script>
 
 <template>
-  <el-empty :image="logo" description="You are not authorized to perform this action" image-size="50vh"></el-empty>
+  <el-empty :image="logo" :image-size="300" description="You are not authorized to perform this action"></el-empty>
 </template>
 
 <style scoped>
