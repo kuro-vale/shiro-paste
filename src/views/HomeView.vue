@@ -68,7 +68,13 @@ fetchData();
       </el-container>
     </el-header>
     <el-main class="centered">
-      <PasteCard v-for="paste in pastes?.items" :key="paste.id" :paste="paste"></PasteCard>
+      <PasteCard
+          v-for="paste in pastes?.items"
+          :key="paste.id"
+          :paste="paste"
+          :preview="true"
+          style="width: 75vw"
+      />
       <el-empty v-if="!(pastes?.items?.length > 0)" :image-size="200"/>
     </el-main>
     <el-footer>

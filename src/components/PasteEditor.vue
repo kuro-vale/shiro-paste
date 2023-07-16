@@ -38,6 +38,7 @@ async function submitForm(form) {
   loading.value = true;
   emit("submit", pasteForm);
 }
+
 function setLang(lang) {
   // todo
   if (lang === "javascript") pasteForm.extension = ".js";

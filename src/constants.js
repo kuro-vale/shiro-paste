@@ -5,4 +5,5 @@ export const LOGIN_ROUTE = "/login";
 export const REGISTER_ROUTE = "/register";
 export const PROFILE_ROUTE = "/profile";
 export const UNAUTHORIZED_ROUTE = "/unauthorized";
-export const CREATE_ROUTE = '/create'
+export const CREATE_ROUTE = "/pastes/create";
+export const SHOW_PASTE_ROUTE = "/pastes/:id";

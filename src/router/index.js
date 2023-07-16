@@ -5,8 +5,17 @@ import RegisterView from "@/views/Auth/RegisterView.vue";
 import store from "@/store";
 import ProfileView from "@/views/Auth/ProfileView.vue";
 import UnauthorizedView from "@/views/Auth/UnauthorizedView.vue";
-import {CREATE_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REGISTER_ROUTE, UNAUTHORIZED_ROUTE} from "@/constants";
+import {
+    CREATE_ROUTE,
+    HOME_ROUTE,
+    LOGIN_ROUTE,
+    PROFILE_ROUTE,
+    REGISTER_ROUTE,
+    SHOW_PASTE_ROUTE,
+    UNAUTHORIZED_ROUTE
+} from "@/constants";
 import CreatePasteView from "@/views/Pastes/CreatePasteView.vue";
+import ShowPasteView from "@/views/Pastes/ShowPasteView.vue";
 
 function anonymousRoute() {
     return !store.state.currentUser;
@@ -64,7 +73,12 @@ const router = createRouter({
                 if (authRoute()) next();
                 else next("/login");
             },
-        }
+        },
+        {
+            path: SHOW_PASTE_ROUTE,
+            name: "show",
+            component: ShowPasteView,
+        },
     ]
 });
 

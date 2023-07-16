@@ -1,12 +1,12 @@
 <script setup>
-import {RouterView} from "vue-router";
+import {RouterView, useRoute} from "vue-router";
 import {ElMenu, ElMenuItem, ElAvatar, ElText, ElSubMenu} from "element-plus";
-import router from "@/router";
 import {useStore} from "vuex";
 import {onMounted} from "vue";
 import {redirectTo, triggerNotification} from "@/utils";
 import {HOME_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REGISTER_ROUTE} from "@/constants";
 
+const route = useRoute();
 const store = useStore();
 
 onMounted(() => store.commit("setCurrentUser"));
@@ -21,10 +21,10 @@ function logout() {
 <template>
   <nav>
     <el-menu
-        :default-active="router.currentRoute.value.path"
+        :default-active="route.path"
         :ellipsis="false"
-        mode="horizontal"
         menu-trigger="click"
+        mode="horizontal"
     >
       <el-menu-item :index="HOME_ROUTE" @click="e => redirectTo(e.index)">
         Home
