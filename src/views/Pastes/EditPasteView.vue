@@ -1,0 +1,45 @@
+<script setup>
+import {ElContainer, ElHeader, ElLoading, ElMain} from "element-plus";
+import PasteEditor from "@/components/PasteEditor.vue";
+import {ref} from "vue";
+import {redirectTo} from "@/utils";
+import {API_URL, NOT_FOUND_ROUTE, UNAUTHORIZED_ROUTE} from "@/constants";
+import {useRoute} from "vue-router";
+import {useStore} from "vuex";
+
+const formRef = ref();
+const store = useStore();
+const route = useRoute();
+const pasteId = route.params.id;
+const URL = `${API_URL}/pastes/${pasteId}`;
+const paste = ref(null);
+
+async function fetchPaste() {
+  const loader = ElLoading.service();
+  const response = await fetch(URL);
+  loader.close();
+  if (!response.ok) {
+    redirectTo(NOT_FOUND_ROUTE);
+    return;
+  }
+  paste.value = await response.json();
+  if (paste.value["created_by"]["id"] !== store.state.currentUser.sub) {
+    redirectTo(UNAUTHORIZED_ROUTE);
+  }
+}
+
+fetchPaste();
+</script>
+
+<template>
+  <el-container>
+    <el-header><h1>Edit paste</h1></el-header>
+    <el-main class="centered">
+      <PasteEditor v-if="paste" ref="formRef" :paste="paste">Edit</PasteEditor>
+    </el-main>
+  </el-container>
+</template>
+
+<style scoped>
+
+</style>

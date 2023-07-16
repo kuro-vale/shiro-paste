@@ -1,3 +1,7 @@
 .centered {
     align-self: center;
 }
+
+.flex-grow {
+    flex-grow: 1;
+}

@@ -6,12 +6,15 @@ import CodeEditor from "simple-code-editor";
 import hljs from "highlight.js";
 import {reactive, ref} from "vue";
 
+const props = defineProps({
+  paste: Object,
+});
 const emit = defineEmits(["submit"]);
 const loading = ref(false);
 const pasteForm = reactive({
-  body: "",
-  filename: "",
-  extension: ""
+  body: props.paste?.body || "",
+  filename: props.paste?.filename || "",
+  extension: props.paste?.extension || ""
 });
 const pasteFormRef = ref();
 const validateBody = (rule, value, callback) => {
@@ -39,9 +42,22 @@ async function submitForm(form) {
   emit("submit", pasteForm);
 }
 
-function setLang(lang) {
+function getLang(lang) {
   // todo
-  if (lang === "javascript") pasteForm.extension = ".js";
+  if (lang === "js") pasteForm.extension = ".js";
+  if (lang === "txt") pasteForm.extension = ".txt";
+}
+
+function setLanguage() {
+  // todo
+  let langList = [["txt", "Text"], ["js", "Javascript"]];
+  if (props.paste) {
+    // todo
+    const currentLang = [[props.paste.extension.slice(1), "Custom"]];
+    return [...currentLang, ...langList.filter(x => x[0] !== currentLang[0][0])];
+  } else {
+    return langList;
+  }
 }
 </script>
 
@@ -61,11 +77,12 @@ function setLang(lang) {
     <CodeEditor
         v-model="pasteForm.body"
         :autofocus="true"
+        :languages="setLanguage()"
         :line-nums="true"
         height="55vh"
         theme="github"
-        width="75vw"
-        @lang="setLang"
+        width="90vw"
+        @lang="getLang"
     />
     <el-form-item prop="body"/>
   </el-form>

@@ -24,7 +24,8 @@ onMounted(() => document.title = "shiro-paste");
 const URL = `${API_URL}/pastes`;
 const pastes = ref(null);
 const store = useStore();
-const dialog = ref();
+const uploadDialogRef = ref();
+const openUploadDialog = () => uploadDialogRef.value.opened = true;
 
 async function fetchData() {
   const loader = ElLoading.service();
@@ -58,12 +59,12 @@ fetchData();
             />
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item @click="redirectTo(CREATE_ROUTE)">Create</el-dropdown-item>
-                <el-dropdown-item @click="dialog.opened = true">Upload</el-dropdown-item>
+                <el-dropdown-item @click="redirectTo(CREATE_ROUTE)">Create paste</el-dropdown-item>
+                <el-dropdown-item @click="openUploadDialog">Upload pastes</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <UploadDialog ref="dialog"/>
+          <UploadDialog ref="uploadDialogRef"/>
         </template>
       </el-container>
     </el-header>

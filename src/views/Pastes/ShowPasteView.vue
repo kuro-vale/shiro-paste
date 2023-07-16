@@ -17,13 +17,12 @@ const paste = ref(null);
 async function fetchPaste() {
   const loader = ElLoading.service();
   const response = await fetch(URL);
+  loader.close();
   if (!response.ok) {
-    loader.close();
     redirectTo(NOT_FOUND_ROUTE);
     return;
   }
   paste.value = await response.json();
-  loader.close();
 }
 
 fetchPaste();

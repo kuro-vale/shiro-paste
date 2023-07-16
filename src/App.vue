@@ -61,10 +61,6 @@ function logout() {
 </template>
 
 <style scoped>
-.flex-grow {
-  flex-grow: 1;
-}
-
 .ml-10 {
   margin-left: 10px;
 }
