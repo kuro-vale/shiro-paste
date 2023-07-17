@@ -11,9 +11,9 @@ import {
   ElDropdown,
   ElDropdownMenu,
   ElDropdownItem,
-  ElPagination
+  ElPagination, ElOption, ElInput, ElSelect
 } from "element-plus";
-import {Plus} from "@element-plus/icons-vue";
+import {Plus, Search} from "@element-plus/icons-vue";
 import PasteCard from "@/components/PasteCard.vue";
 import {API_URL, CREATE_ROUTE} from "@/constants";
 import {redirectTo} from "@/utils";
@@ -28,17 +28,26 @@ const store = useStore();
 const uploadDialogRef = ref();
 const openUploadDialog = () => uploadDialogRef.value.opened = true;
 const currentPage = ref(1);
+const select = ref("body");
+const inputSearch = ref("");
+let query = "";
 
 async function fetchData() {
   const loader = ElLoading.service();
   pastes.value = null;
-  const res = await fetch(`${URL}?page=${currentPage.value}`);
+  const res = await fetch(`${URL}?page=${currentPage.value}${query}`);
   if (res.status === 204) {
     loader.close();
     return;
   }
   pastes.value = await res.json();
   loader.close();
+}
+
+function searchPaste() {
+  currentPage.value = 1;
+  query = inputSearch.value !== "" ? `&${select.value}=${inputSearch.value}` : "";
+  fetchData();
 }
 
 fetchData();
@@ -49,6 +58,24 @@ fetchData();
     <el-header>
       <el-container style="justify-content: space-between">
         <h1>All Pastes</h1>
+        <div class="centered small-screens">
+          <el-input
+              v-model="inputSearch"
+              placeholder="Search by"
+              @keydown.enter="searchPaste"
+          >
+            <template #prepend>
+              <el-button :icon="Search"/>
+            </template>
+            <template #append>
+              <el-select v-model="select" placeholder="Select" style="width: 115px;">
+                <el-option label="File body" value="body"/>
+                <el-option label="Filename" value="filename"/>
+                <el-option label="Extension" value="extension"/>
+              </el-select>
+            </template>
+          </el-input>
+        </div>
         <template v-if="store.state.currentUser">
           <el-dropdown trigger="click">
             <el-button
@@ -82,12 +109,14 @@ fetchData();
     </el-main>
     <el-footer class="centered">
       <el-pagination
+          v-if="pastes?.metadata"
           v-model:current-page="currentPage"
           :background="true"
-          :page-size="pastes?.metadata['per'] || 0"
-          :small="false"
-          :total="pastes?.metadata['count'] || 0"
-          layout="total, prev, pager, next"
+          :hide-on-single-page="true"
+          :page-size="pastes.metadata['per']"
+          :small="true"
+          :total="pastes.metadata['count']"
+          layout="prev, pager, next"
           @current-change="fetchData"
       />
     </el-footer>
@@ -95,5 +124,9 @@ fetchData();
 </template>
 
 <style>
-
+@media (max-width: 500px) {
+  .small-screens {
+    display: none;
+  }
+}
 </style>
