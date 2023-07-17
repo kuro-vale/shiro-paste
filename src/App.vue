@@ -4,7 +4,7 @@ import {ElMenu, ElMenuItem, ElAvatar, ElText, ElSubMenu} from "element-plus";
 import {useStore} from "vuex";
 import {onMounted} from "vue";
 import {redirectTo, triggerNotification} from "@/utils";
-import {HOME_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REGISTER_ROUTE} from "@/constants";
+import {HOME_ROUTE, LOGIN_ROUTE, MY_PASTES_ROUTE, PROFILE_ROUTE, REGISTER_ROUTE} from "@/constants";
 
 const route = useRoute();
 const store = useStore();
@@ -14,7 +14,7 @@ onMounted(() => store.commit("setCurrentUser"));
 function logout() {
   store.commit("logout");
   triggerNotification("See you again", "Successfully logout", "info");
-  redirectTo(HOME_ROUTE);
+  redirectTo(LOGIN_ROUTE);
 }
 </script>
 
@@ -39,6 +39,9 @@ function logout() {
           </template>
           <el-menu-item :index="PROFILE_ROUTE" @click="e => redirectTo(e.index)">
             Profile
+          </el-menu-item>
+          <el-menu-item :index="MY_PASTES_ROUTE" @click="e => redirectTo(e.index)">
+            My pastes
           </el-menu-item>
           <el-menu-item index="logout" @click="logout()">
             Logout

@@ -9,3 +9,4 @@ export const CREATE_ROUTE = "/pastes/create";
 export const SHOW_PASTE_ROUTE = "/pastes/:id";
 export const EDIT_PASTE_ROUTE = "/pastes/:id/edit";
 export const NOT_FOUND_ROUTE = "/404";
+export const MY_PASTES_ROUTE = "/pastes/me"

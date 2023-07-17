@@ -10,6 +10,7 @@ import {
     EDIT_PASTE_ROUTE,
     HOME_ROUTE,
     LOGIN_ROUTE,
+    MY_PASTES_ROUTE,
     NOT_FOUND_ROUTE,
     PROFILE_ROUTE,
     REGISTER_ROUTE,
@@ -20,6 +21,7 @@ import CreatePasteView from "@/views/Pastes/CreatePasteView.vue";
 import ShowPasteView from "@/views/Pastes/ShowPasteView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 import EditPasteView from "@/views/Pastes/EditPasteView.vue";
+import MyPastesView from "@/views/Pastes/MyPastesView.vue";
 
 function anonymousRoute() {
     return !store.state.currentUser;
@@ -96,6 +98,15 @@ const router = createRouter({
             path: NOT_FOUND_ROUTE,
             name: "Not found",
             component: NotFoundView,
+        },
+        {
+            path: MY_PASTES_ROUTE,
+            name: "My pastes",
+            component: MyPastesView,
+            beforeEnter: (to, from, next) => {
+                if (authRoute()) next();
+                else next("/login");
+            },
         },
     ]
 });
