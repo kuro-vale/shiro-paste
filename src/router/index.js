@@ -15,13 +15,15 @@ import {
     PROFILE_ROUTE,
     REGISTER_ROUTE,
     SHOW_PASTE_ROUTE,
-    UNAUTHORIZED_ROUTE
+    UNAUTHORIZED_ROUTE,
+    USER_PASTES_ROUTE
 } from "@/constants";
 import CreatePasteView from "@/views/Pastes/CreatePasteView.vue";
 import ShowPasteView from "@/views/Pastes/ShowPasteView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 import EditPasteView from "@/views/Pastes/EditPasteView.vue";
 import MyPastesView from "@/views/Pastes/MyPastesView.vue";
+import UserPastesView from "@/views/Pastes/UserPastesView.vue";
 
 function anonymousRoute() {
     return !store.state.currentUser;
@@ -107,6 +109,11 @@ const router = createRouter({
                 if (authRoute()) next();
                 else next("/login");
             },
+        },
+        {
+            path: USER_PASTES_ROUTE,
+            name: "user pastes",
+            component: UserPastesView,
         },
     ]
 });

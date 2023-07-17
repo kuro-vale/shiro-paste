@@ -56,7 +56,9 @@ function setLanguage() {
       <div class="card-header">
         <el-avatar :src="'https://robohash.org/' + paste['created_by']['username'] + '?set=set4'"></el-avatar>
         <el-breadcrumb :separator-icon="ArrowRight" class="ml-15">
-          <el-breadcrumb-item>{{ paste["created_by"]["username"] }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{name: 'user pastes', params: {id: paste['created_by']['id']}}">
+            {{ paste["created_by"]["username"] }}
+          </el-breadcrumb-item>
           <el-breadcrumb-item :to="{name: 'show', params: {id: paste['id']}}">{{
               paste["filename"]
             }}

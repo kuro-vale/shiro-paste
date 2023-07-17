@@ -23,6 +23,8 @@ import UploadDialog from "@/components/UploadDialog.vue";
 const props = defineProps({
   url: String
 });
+// When filtering by user id, get the username by the first paste, only use when filtering by user id
+const emit = defineEmits(["pastes_username"]);
 const pastes = ref(null);
 const store = useStore();
 const uploadDialogRef = ref();
@@ -42,12 +44,10 @@ async function fetchData() {
       "Authorization": `Bearer ${token}`,
     },
   });
-  if (res.status === 204) {
-    loader.close();
-    return;
-  }
-  pastes.value = await res.json();
   loader.close();
+  if (res.status === 204 || !res.ok) return;
+  pastes.value = await res.json();
+  emit("pastes_username", pastes.value["items"][0]["created_by"]["username"]);
 }
 
 function searchPaste() {
@@ -103,6 +103,7 @@ fetchData();
           </el-dropdown>
           <UploadDialog ref="uploadDialogRef"/>
         </template>
+        <div v-else></div>
       </el-container>
     </el-header>
     <el-main class="centered">
