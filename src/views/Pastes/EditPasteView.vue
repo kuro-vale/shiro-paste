@@ -2,8 +2,8 @@
 import {ElContainer, ElHeader, ElLoading, ElMain} from "element-plus";
 import PasteEditor from "@/components/PasteEditor.vue";
 import {ref} from "vue";
-import {redirectTo} from "@/utils";
-import {API_URL, NOT_FOUND_ROUTE, UNAUTHORIZED_ROUTE} from "@/constants";
+import {redirectTo, triggerNotification} from "@/utils";
+import {API_URL, JWT_KEY, NOT_FOUND_ROUTE, SHOW_PASTE_ROUTE, UNAUTHORIZED_ROUTE} from "@/constants";
 import {useRoute} from "vue-router";
 import {useStore} from "vuex";
 
@@ -13,6 +13,26 @@ const route = useRoute();
 const pasteId = route.params.id;
 const URL = `${API_URL}/pastes/${pasteId}`;
 const paste = ref(null);
+const token = sessionStorage.getItem(JWT_KEY) || localStorage.getItem(JWT_KEY);
+
+async function editPaste(request) {
+  const response = await fetch(URL, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(request),
+  });
+  if (!response.ok) {
+    const {message} = await response.json();
+    formRef.value.loading = false;
+    triggerNotification("Error", message, "error");
+    return;
+  }
+  triggerNotification("Success", "Paste edited", "success");
+  redirectTo(SHOW_PASTE_ROUTE.replace(":id", pasteId));
+}
 
 async function fetchPaste() {
   const loader = ElLoading.service();
@@ -35,7 +55,7 @@ fetchPaste();
   <el-container>
     <el-header><h1>Edit paste</h1></el-header>
     <el-main class="centered">
-      <PasteEditor v-if="paste" ref="formRef" :paste="paste">Edit</PasteEditor>
+      <PasteEditor v-if="paste" ref="formRef" :paste="paste" @submit="args => editPaste(args)">Edit</PasteEditor>
     </el-main>
   </el-container>
 </template>

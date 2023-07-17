@@ -3,7 +3,7 @@ import {ElContainer, ElHeader, ElMain} from "element-plus";
 import SocialsFooter from "@/components/SocialsFooter.vue";
 import PasteEditor from "@/components/PasteEditor.vue";
 import {onMounted, ref} from "vue";
-import {API_URL, HOME_ROUTE, JWT_KEY} from "@/constants";
+import {API_URL, JWT_KEY, SHOW_PASTE_ROUTE} from "@/constants";
 import {redirectTo, triggerNotification} from "@/utils";
 
 onMounted(() => document.title = "shiro-paste");
@@ -27,8 +27,9 @@ async function createPaste(request) {
     triggerNotification("Error", message, "error");
     return;
   }
+  const {id} = await response.json();
   triggerNotification("Success", "Paste created successfully", "success");
-  redirectTo(HOME_ROUTE);
+  redirectTo(SHOW_PASTE_ROUTE.replace(":id", id));
 }
 </script>
 
