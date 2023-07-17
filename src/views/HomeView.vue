@@ -10,7 +10,8 @@ import {
   ElButton,
   ElDropdown,
   ElDropdownMenu,
-  ElDropdownItem
+  ElDropdownItem,
+  ElPagination
 } from "element-plus";
 import {Plus} from "@element-plus/icons-vue";
 import PasteCard from "@/components/PasteCard.vue";
@@ -26,11 +27,12 @@ const pastes = ref(null);
 const store = useStore();
 const uploadDialogRef = ref();
 const openUploadDialog = () => uploadDialogRef.value.opened = true;
+const currentPage = ref(1);
 
 async function fetchData() {
   const loader = ElLoading.service();
   pastes.value = null;
-  const res = await fetch(URL);
+  const res = await fetch(`${URL}?page=${currentPage.value}`);
   if (res.status === 204) {
     loader.close();
     return;
@@ -46,7 +48,7 @@ fetchData();
   <el-container>
     <el-header>
       <el-container style="justify-content: space-between">
-        <h1>Latest Pastes</h1>
+        <h1>All Pastes</h1>
         <template v-if="store.state.currentUser">
           <el-dropdown trigger="click">
             <el-button
@@ -78,8 +80,16 @@ fetchData();
       />
       <el-empty v-if="!(pastes?.items?.length > 0)" :image-size="200"/>
     </el-main>
-    <el-footer>
-
+    <el-footer class="centered">
+      <el-pagination
+          v-model:current-page="currentPage"
+          :background="true"
+          :page-size="pastes?.metadata['per'] || 0"
+          :small="false"
+          :total="pastes?.metadata['count'] || 0"
+          layout="total, prev, pager, next"
+          @current-change="fetchData"
+      />
     </el-footer>
   </el-container>
 </template>
