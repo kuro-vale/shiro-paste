@@ -15,7 +15,7 @@ import CodeEditor from "simple-code-editor";
 // eslint-disable-next-line no-unused-vars
 import hljs from "highlight.js";
 import {redirectTo, triggerNotification} from "@/utils";
-import {API_URL, EDIT_PASTE_ROUTE, HOME_ROUTE, JWT_KEY, SHOW_PASTE_ROUTE} from "@/constants";
+import {API_URL, EDIT_PASTE_ROUTE, HOME_ROUTE, JWT_KEY, SHOW_PASTE_ROUTE, STARGAZERS_ROUTE} from "@/constants";
 import {Edit, Delete, ArrowRight, Star} from "@element-plus/icons-vue";
 import {useStore} from "vuex";
 import {ref} from "vue";
@@ -116,7 +116,9 @@ function setLanguage() {
               {{ paste["stars"] + starGiven }}
             </el-button>
           </template>
-          <el-link type="primary">Show stargazers</el-link>
+          <el-link type="primary" @click="redirectTo(STARGAZERS_ROUTE.replace(':id', paste['id']))">
+            Show stargazers
+          </el-link>
           <div v-if="store.state.currentUser">
             <el-link type="success" @click="giveAStar">Give a star</el-link>
             <el-link type="danger" @click="removeStar">Remove star</el-link>

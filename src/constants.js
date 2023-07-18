@@ -11,3 +11,4 @@ export const EDIT_PASTE_ROUTE = "/pastes/:id/edit";
 export const NOT_FOUND_ROUTE = "/404";
 export const MY_PASTES_ROUTE = "/pastes/me";
 export const USER_PASTES_ROUTE = "/pastes/user/:id";
+export const STARGAZERS_ROUTE = "/pastes/:id/stargazers";
