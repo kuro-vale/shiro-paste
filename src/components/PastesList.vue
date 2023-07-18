@@ -44,10 +44,11 @@ async function fetchData() {
       "Authorization": `Bearer ${token}`,
     },
   });
+  if (res.status !== 204 && res.ok) {
+    pastes.value = await res.json();
+    emit("pastes_username", pastes.value["items"][0]["created_by"]["username"]);
+  }
   loader.close();
-  if (res.status === 204 || !res.ok) return;
-  pastes.value = await res.json();
-  emit("pastes_username", pastes.value["items"][0]["created_by"]["username"]);
 }
 
 function searchPaste() {
@@ -133,9 +134,5 @@ fetchData();
 </template>
 
 <style scoped>
-@media (max-width: 500px) {
-  .small-screens {
-    display: none;
-  }
-}
+
 </style>
