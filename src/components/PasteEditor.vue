@@ -5,6 +5,7 @@ import CodeEditor from "simple-code-editor";
 // eslint-disable-next-line no-unused-vars
 import hljs from "highlight.js";
 import {reactive, ref} from "vue";
+import {LANG_EXTENSIONS, LANG_LIST} from "@/constants";
 
 const props = defineProps({
   paste: Object,
@@ -43,20 +44,20 @@ async function submitForm(form) {
 }
 
 function getLang(lang) {
-  // todo
-  if (lang === "js") pasteForm.extension = ".js";
-  if (lang === "txt") pasteForm.extension = ".txt";
+  for (const extension in LANG_EXTENSIONS) {
+    if (LANG_EXTENSIONS[extension] === lang) {
+      pasteForm.extension = extension;
+    }
+  }
 }
 
 function setLanguage() {
-  // todo
-  let langList = [["txt", "Text"], ["js", "Javascript"]];
   if (props.paste) {
-    // todo
-    const currentLang = [[props.paste.extension.slice(1), "Custom"]];
-    return [...currentLang, ...langList.filter(x => x[0] !== currentLang[0][0])];
+    const currentLang = [LANG_LIST.find(x => x[0] === LANG_EXTENSIONS[props.paste.extension.toLowerCase()])];
+    if (!currentLang[0]) return LANG_LIST;
+    return [...currentLang, ...LANG_LIST.filter(x => x[0] !== currentLang[0][0])];
   } else {
-    return langList;
+    return LANG_LIST;
   }
 }
 </script>

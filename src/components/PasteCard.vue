@@ -15,7 +15,15 @@ import CodeEditor from "simple-code-editor";
 // eslint-disable-next-line no-unused-vars
 import hljs from "highlight.js";
 import {redirectTo, triggerNotification} from "@/utils";
-import {API_URL, EDIT_PASTE_ROUTE, HOME_ROUTE, JWT_KEY, SHOW_PASTE_ROUTE, STARGAZERS_ROUTE} from "@/constants";
+import {
+  API_URL,
+  EDIT_PASTE_ROUTE,
+  HOME_ROUTE,
+  JWT_KEY, LANG_EXTENSIONS,
+  LANG_LIST,
+  SHOW_PASTE_ROUTE,
+  STARGAZERS_ROUTE
+} from "@/constants";
 import {Edit, Delete, ArrowRight, Star} from "@element-plus/icons-vue";
 import {useStore} from "vuex";
 import {ref} from "vue";
@@ -89,8 +97,7 @@ async function removeStar() {
 }
 
 function setLanguage() {
-  // todo
-  return [["text"]];
+  return [LANG_LIST.find(x => x[0] === LANG_EXTENSIONS[props.paste.extension.toLowerCase()]) || ["plaintext", "Text"]];
 }
 </script>
 
@@ -105,7 +112,7 @@ function setLanguage() {
             {{ paste["created_by"]["username"] }}
           </el-breadcrumb-item>
           <el-breadcrumb-item :to="{name: 'show', params: {id: paste['id']}}">{{
-              paste["filename"]
+              paste["filename"] + paste["extension"]
             }}
           </el-breadcrumb-item>
         </el-breadcrumb>
