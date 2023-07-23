@@ -1,7 +1,7 @@
 <script setup>
 import {useRoute} from "vue-router";
 import {API_URL, USER_PASTES_ROUTE} from "@/constants";
-import {ElCard, ElCol, ElContainer, ElHeader, ElLink, ElLoading, ElMain, ElRow} from "element-plus";
+import {ElCard, ElCol, ElContainer, ElEmpty, ElHeader, ElLink, ElLoading, ElMain, ElRow} from "element-plus";
 import {ref} from "vue";
 import {redirectTo} from "@/utils";
 
@@ -13,7 +13,7 @@ const users = ref(null);
 async function fetchData() {
   const loader = ElLoading.service();
   const response = await fetch(URL);
-  if (response.ok) {
+  if (response.ok && response.status !== 204) {
     users.value = await response.json();
   }
   loader.close();
@@ -41,6 +41,7 @@ fetchData();
           </el-card>
         </el-col>
       </el-row>
+      <el-empty v-if="!(users?.length > 0)" :image-size="200"/>
     </el-main>
   </el-container>
 </template>
