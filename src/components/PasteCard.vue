@@ -4,12 +4,12 @@ import {
   ElAvatar,
   ElBreadcrumb,
   ElBreadcrumbItem,
+  ElButton,
   ElCard,
   ElLink,
   ElLoading,
   ElMessageBox,
-  ElPopover,
-  ElButton
+  ElPopover
 } from "element-plus";
 import CodeEditor from "simple-code-editor";
 // eslint-disable-next-line no-unused-vars
@@ -19,12 +19,13 @@ import {
   API_URL,
   EDIT_PASTE_ROUTE,
   HOME_ROUTE,
-  JWT_KEY, LANG_EXTENSIONS,
+  JWT_KEY,
+  LANG_EXTENSIONS,
   LANG_LIST,
   SHOW_PASTE_ROUTE,
   STARGAZERS_ROUTE
 } from "@/constants";
-import {Edit, Delete, ArrowRight, Star} from "@element-plus/icons-vue";
+import {ArrowRight, Delete, Edit, Star} from "@element-plus/icons-vue";
 import {useStore} from "vuex";
 import {ref} from "vue";
 

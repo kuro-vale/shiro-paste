@@ -5,13 +5,14 @@ import {redirectTo, triggerNotification} from "@/utils";
 import {
   ElButton,
   ElContainer,
-  ElHeader,
-  ElMain,
-  ElImage,
   ElDivider,
+  ElHeader,
+  ElImage,
+  ElLoading,
+  ElMain,
+  ElMessageBox,
   ElSkeleton,
-  ElSkeletonItem,
-  ElMessageBox, ElLoading
+  ElSkeletonItem
 } from "element-plus";
 import {useStore} from "vuex";
 import SocialsFooter from "@/components/SocialsFooter.vue";

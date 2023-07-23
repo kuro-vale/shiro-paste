@@ -1,6 +1,6 @@
 <script setup>
 import {RouterView, useRoute} from "vue-router";
-import {ElMenu, ElMenuItem, ElAvatar, ElText, ElSubMenu} from "element-plus";
+import {ElAvatar, ElMenu, ElMenuItem, ElSubMenu, ElText} from "element-plus";
 import {useStore} from "vuex";
 import {onMounted} from "vue";
 import {redirectTo, triggerNotification} from "@/utils";

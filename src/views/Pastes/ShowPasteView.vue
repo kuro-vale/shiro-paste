@@ -1,8 +1,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import {ElContainer, ElMain} from "element-plus";
+import {ElContainer, ElLoading, ElMain} from "element-plus";
 import {API_URL, NOT_FOUND_ROUTE} from "@/constants";
-import {ElLoading} from "element-plus";
 import {useRoute} from "vue-router";
 import PasteCard from "@/components/PasteCard.vue";
 import {redirectTo} from "@/utils";

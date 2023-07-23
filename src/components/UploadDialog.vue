@@ -1,5 +1,5 @@
 <script setup>
-import {ElButton, ElDialog, ElUpload, ElIcon} from "element-plus";
+import {ElButton, ElDialog, ElIcon, ElUpload} from "element-plus";
 import {ref} from "vue";
 import {UploadFilled} from "@element-plus/icons-vue";
 import {API_URL, JWT_KEY} from "@/constants";

@@ -1,7 +1,7 @@
 <script setup>
 import {useRoute} from "vue-router";
 import {API_URL, USER_PASTES_ROUTE} from "@/constants";
-import {ElLoading, ElContainer, ElHeader, ElMain, ElRow, ElCol, ElCard, ElLink} from "element-plus";
+import {ElCard, ElCol, ElContainer, ElHeader, ElLink, ElLoading, ElMain, ElRow} from "element-plus";
 import {ref} from "vue";
 import {redirectTo} from "@/utils";
 
