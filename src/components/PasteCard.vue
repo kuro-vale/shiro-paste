@@ -14,7 +14,7 @@ import {
 import CodeEditor from "simple-code-editor";
 // eslint-disable-next-line no-unused-vars
 import hljs from "highlight.js";
-import {redirectTo, triggerNotification} from "@/utils";
+import {getTheme, redirectTo, triggerNotification} from "@/utils";
 import {
   API_URL,
   EDIT_PASTE_ROUTE,
@@ -150,9 +150,9 @@ function setLanguage() {
         :line-nums="true"
         :max-height="preview ? '280px' : ''"
         :read-only="true"
+        :theme="getTheme()"
         :value="paste['body']"
         border-radius="0"
-        theme="github"
         width="100%"
         @click="preview && redirectTo(SHOW_PASTE_ROUTE.replace(':id', paste['id']))"
     ></CodeEditor>

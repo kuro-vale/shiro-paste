@@ -34,7 +34,8 @@ function logout() {
       <template v-if="store.state.currentUser">
         <el-sub-menu index="user">
           <template #title>
-            <el-avatar :src="'https://robohash.org/' + store.state.currentUser.username + '?set=set4'"/>
+            <el-avatar :src="'https://robohash.org/' + store.state.currentUser.username + '?set=set4'"
+                       alt="profile-photo"/>
             <el-text class="ml-10">{{ store.state.currentUser.username }}</el-text>
           </template>
           <el-menu-item :index="PROFILE_ROUTE" @click="e => redirectTo(e.index)">

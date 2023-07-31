@@ -1,7 +1,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import {API_URL, HOME_ROUTE, JWT_KEY, UNAUTHORIZED_ROUTE} from "@/constants";
-import {redirectTo, triggerNotification} from "@/utils";
+import {API_URL, HOME_ROUTE, JWT_KEY, themes, UNAUTHORIZED_ROUTE} from "@/constants";
+import {getTheme, redirectTo, triggerNotification} from "@/utils";
 import {
   ElButton,
   ElContainer,
@@ -11,6 +11,8 @@ import {
   ElLoading,
   ElMain,
   ElMessageBox,
+  ElOption,
+  ElSelect,
   ElSkeleton,
   ElSkeletonItem
 } from "element-plus";
@@ -24,6 +26,7 @@ const profile = ref(null);
 const store = useStore();
 const loading = ref(true);
 const token = sessionStorage.getItem(JWT_KEY) || localStorage.getItem(JWT_KEY);
+const selectedTheme = ref(getTheme());
 
 async function getProfile() {
   const response = await fetch(`${URL}/profile`, {
@@ -70,6 +73,13 @@ function deleteUser() {
   }).catch(() => null);
 }
 
+function setTheme(theme) {
+  const d = new Date();
+  d.setTime(d.getTime() + (400 * 24 * 60 * 60 * 1000));
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = `sceTheme=${theme};${expires};path=/`;
+}
+
 getProfile();
 </script>
 
@@ -82,8 +92,18 @@ getProfile();
           <el-skeleton-item style="width: 100%; height: 40vh" variant="image"></el-skeleton-item>
         </template>
         <template #default>
-          <el-image :src="'https://robohash.org/' + profile.username + '?set=set4'" style="width: 40vh"></el-image>
-          <el-divider></el-divider>
+          <el-image :src="'https://robohash.org/' + profile.username + '?set=set4'" alt="profile-photo"
+                    style="width: 40vh"></el-image>
+          <el-divider/>
+          <el-select v-model="selectedTheme" @change="setTheme">
+            <el-option
+                v-for="theme in themes"
+                :key="theme"
+                :label="theme"
+                :value="theme"
+            />
+          </el-select>
+          <el-divider/>
           <el-button type="danger" @click="deleteUser()">Delete user</el-button>
         </template>
       </el-skeleton>

@@ -77,7 +77,7 @@ fetchData();
               @keydown.enter="searchPaste"
           >
             <template #prepend>
-              <el-button :icon="Search"/>
+              <el-button :icon="Search" title="search"/>
             </template>
             <template #append>
               <el-select v-model="select" placeholder="Select" style="width: 115px;">
@@ -96,6 +96,7 @@ fetchData();
                 class="centered"
                 size="large"
                 style="margin-right: 20px"
+                title="create"
                 type="success"
             />
             <template #dropdown>

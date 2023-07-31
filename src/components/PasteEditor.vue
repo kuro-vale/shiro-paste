@@ -6,6 +6,7 @@ import CodeEditor from "simple-code-editor";
 import hljs from "highlight.js";
 import {reactive, ref} from "vue";
 import {LANG_EXTENSIONS, LANG_LIST} from "@/constants";
+import {getTheme} from "@/utils";
 
 const props = defineProps({
   paste: Object,
@@ -80,8 +81,8 @@ function setLanguage() {
         :autofocus="true"
         :languages="setLanguage()"
         :line-nums="true"
+        :theme="getTheme()"
         height="55vh"
-        theme="github"
         width="90vw"
         @lang="getLang"
     />
