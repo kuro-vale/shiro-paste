@@ -14,11 +14,13 @@ import {
   ElOption,
   ElSelect,
   ElSkeleton,
-  ElSkeletonItem
+  ElSkeletonItem,
+  ElText
 } from "element-plus";
+import {Sunny, Moon} from "@element-plus/icons-vue";
 import {useStore} from "vuex";
 import SocialsFooter from "@/components/SocialsFooter.vue";
-import {useTitle} from "@vueuse/core";
+import {useColorMode, useTitle} from "@vueuse/core";
 
 useTitle("Profile");
 const URL = `${API_URL}/auth`;
@@ -27,6 +29,7 @@ const store = useStore();
 const loading = ref(true);
 const token = sessionStorage.getItem(JWT_KEY) || localStorage.getItem(JWT_KEY);
 const selectedTheme = ref(getTheme());
+const mode = useColorMode();
 
 async function getProfile() {
   const response = await fetch(`${URL}/profile`, {
@@ -95,6 +98,16 @@ getProfile();
           <el-image :src="'https://robohash.org/' + profile.username + '?set=set4'" alt="profile-photo"
                     style="width: 40vh"></el-image>
           <el-divider/>
+          <el-text size="large" style="margin-bottom: 5px" tag="b">Set App/Code-Editor theme</el-text>
+          <!--suppress JSValidateTypes, JSIncompatibleTypesComparison -->
+          <el-button
+              :icon="mode === 'dark' ? Sunny : Moon"
+              round
+              style="margin-bottom: 15px"
+              @click="mode = mode === 'dark' ? 'light' : 'dark'"
+          >
+            {{ mode === "dark" ? "Light" : "Dark" }}
+          </el-button>
           <el-select v-model="selectedTheme" @change="setTheme">
             <el-option
                 v-for="theme in themes"

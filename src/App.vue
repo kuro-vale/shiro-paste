@@ -5,11 +5,13 @@ import {useStore} from "vuex";
 import {onMounted} from "vue";
 import {redirectTo, triggerNotification} from "@/utils";
 import {HOME_ROUTE, LOGIN_ROUTE, MY_PASTES_ROUTE, PROFILE_ROUTE, REGISTER_ROUTE} from "@/constants";
+import {useDark} from "@vueuse/core";
 
 const route = useRoute();
 const store = useStore();
 
 onMounted(() => store.commit("setCurrentUser"));
+useDark();
 
 function logout() {
   store.commit("logout");
