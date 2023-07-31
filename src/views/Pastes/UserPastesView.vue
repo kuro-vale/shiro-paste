@@ -3,7 +3,9 @@ import {useRoute} from "vue-router";
 import {API_URL} from "@/constants";
 import PastesList from "@/components/PastesList.vue";
 import {ref} from "vue";
+import {useTitle} from "@vueuse/core";
 
+useTitle("shiro-paste");
 const route = useRoute();
 const userId = route.params.id;
 const URL = `${API_URL}/pastes/user/${userId}`;

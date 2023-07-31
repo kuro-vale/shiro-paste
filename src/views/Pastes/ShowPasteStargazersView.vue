@@ -4,7 +4,9 @@ import {API_URL, USER_PASTES_ROUTE} from "@/constants";
 import {ElCard, ElCol, ElContainer, ElEmpty, ElHeader, ElLink, ElLoading, ElMain, ElRow} from "element-plus";
 import {ref} from "vue";
 import {redirectTo} from "@/utils";
+import {useTitle} from "@vueuse/core";
 
+useTitle("shiro-paste");
 const route = useRoute();
 const pasteId = route.params.id;
 const URL = `${API_URL}/stars/${pasteId}`;

@@ -1,10 +1,9 @@
 <script setup>
 import PastesList from "@/components/PastesList.vue";
-import {onMounted} from "vue";
 import {API_URL} from "@/constants";
+import {useTitle} from "@vueuse/core";
 
-onMounted(() => document.title = "shiro-paste");
-
+useTitle("shiro-paste");
 const URL = `${API_URL}/pastes`;
 </script>
 

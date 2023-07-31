@@ -6,7 +6,9 @@ import {redirectTo, triggerNotification} from "@/utils";
 import {API_URL, JWT_KEY, NOT_FOUND_ROUTE, SHOW_PASTE_ROUTE, UNAUTHORIZED_ROUTE} from "@/constants";
 import {useRoute} from "vue-router";
 import {useStore} from "vuex";
+import {useTitle} from "@vueuse/core";
 
+useTitle("shiro-paste");
 const formRef = ref();
 const store = useStore();
 const route = useRoute();

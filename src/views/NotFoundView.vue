@@ -1,5 +1,8 @@
 <script setup>
 import {ElEmpty} from "element-plus";
+import {useTitle} from "@vueuse/core";
+
+useTitle("404");
 </script>
 
 <template>

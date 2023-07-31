@@ -1,14 +1,14 @@
 <script setup>
 import {ElContainer, ElHeader, ElMain} from "element-plus";
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import UserForm from "@/components/UserForm.vue";
 import SocialsFooter from "@/components/SocialsFooter.vue";
 import {API_URL, JWT_KEY, PROFILE_ROUTE} from "@/constants";
 import {redirectTo, triggerNotification} from "@/utils";
 import {useStore} from "vuex";
+import {useTitle} from "@vueuse/core";
 
-onMounted(() => document.title = "Login");
-
+useTitle("Login");
 const URL = `${API_URL}/auth/login`;
 const formRef = ref();
 const store = useStore();

@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import {API_URL, HOME_ROUTE, JWT_KEY, themes, UNAUTHORIZED_ROUTE} from "@/constants";
 import {getTheme, redirectTo, triggerNotification} from "@/utils";
 import {
@@ -18,9 +18,9 @@ import {
 } from "element-plus";
 import {useStore} from "vuex";
 import SocialsFooter from "@/components/SocialsFooter.vue";
+import {useTitle} from "@vueuse/core";
 
-onMounted(() => document.title = "Profile");
-
+useTitle("Profile");
 const URL = `${API_URL}/auth`;
 const profile = ref(null);
 const store = useStore();

@@ -2,12 +2,12 @@
 import {ElContainer, ElHeader, ElMain} from "element-plus";
 import SocialsFooter from "@/components/SocialsFooter.vue";
 import PasteEditor from "@/components/PasteEditor.vue";
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import {API_URL, JWT_KEY, SHOW_PASTE_ROUTE} from "@/constants";
 import {redirectTo, triggerNotification} from "@/utils";
+import {useTitle} from "@vueuse/core";
 
-onMounted(() => document.title = "shiro-paste");
-
+useTitle("shiro-paste");
 const URL = `${API_URL}/pastes/compose`;
 const formRef = ref();
 const token = sessionStorage.getItem(JWT_KEY) || localStorage.getItem(JWT_KEY);

@@ -1,13 +1,13 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import {ElContainer, ElLoading, ElMain} from "element-plus";
 import {API_URL, NOT_FOUND_ROUTE} from "@/constants";
 import {useRoute} from "vue-router";
 import PasteCard from "@/components/PasteCard.vue";
 import {redirectTo} from "@/utils";
+import {useTitle} from "@vueuse/core";
 
-onMounted(() => document.title = "shiro-paste");
-
+useTitle("shiro-paste");
 const route = useRoute();
 const pasteId = route.params.id;
 const URL = `${API_URL}/pastes/${pasteId}`;

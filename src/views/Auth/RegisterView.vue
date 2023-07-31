@@ -1,14 +1,14 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import {ElContainer, ElHeader, ElMain} from "element-plus";
 import UserForm from "@/components/UserForm.vue";
 import SocialsFooter from "@/components/SocialsFooter.vue";
 import {API_URL, JWT_KEY, PROFILE_ROUTE} from "@/constants";
 import {useStore} from "vuex";
 import {redirectTo, triggerNotification} from "@/utils";
+import {useTitle} from "@vueuse/core";
 
-onMounted(() => document.title = "Register");
-
+useTitle("Register");
 const URL = `${API_URL}/auth/register`;
 const formRef = ref();
 const store = useStore();

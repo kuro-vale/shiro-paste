@@ -1,6 +1,9 @@
 <script setup>
 import {ElEmpty} from "element-plus";
 import logo from "../../assets/unauthorized.jpg";
+import {useTitle} from "@vueuse/core";
+
+useTitle("Unauthorized");
 </script>
 
 <template>
