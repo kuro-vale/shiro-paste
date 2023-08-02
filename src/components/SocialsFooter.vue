@@ -4,10 +4,12 @@ import {ElFooter, ElLink} from "element-plus";
 
 <template>
   <el-footer class="bottom-footer">
-    <el-link href="https://github.com/kuro-vale/shiro-paste" target="_blank" :underline="false">Github</el-link>
-    <el-link href="https://x.com/kuro-vale/" target="_blank" type="info" :underline="false">X</el-link>
-    <el-link href="https://www.linkedin.com/in/kurovale/" target="_blank" type="primary" :underline="false">LinkedIn</el-link>
-    <el-link href="https://x.com/_Silvervale_" target="_blank" type="success" :underline="false">Best Girl ❤️</el-link>
+    <el-link :underline="false" href="https://github.com/kuro-vale/shiro-paste" target="_blank">Github</el-link>
+    <el-link :underline="false" href="https://x.com/kuro-vale/" target="_blank" type="info">X</el-link>
+    <el-link :underline="false" href="https://www.linkedin.com/in/kurovale/" target="_blank" type="primary">
+      LinkedIn
+    </el-link>
+    <el-link :underline="false" href="https://x.com/_Silvervale_" target="_blank" type="success">Best Girl ❤️</el-link>
   </el-footer>
 </template>
 
