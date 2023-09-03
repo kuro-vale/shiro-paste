@@ -12,6 +12,10 @@ Welcome to my Vue.js web app, this is the frontend of my backend app [kuro-paste
 - Code editor that support most popular languages 
 - Dark theme and Code editor themes
 
+### Docker image
+
+You can run this project by building the Dockerfile or running ```docker compose up```
+
 ### Quick Setup
 
 1. create a .env file, use .env.example as reference
