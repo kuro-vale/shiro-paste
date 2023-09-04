@@ -1,7 +1,7 @@
 FROM node:18-alpine AS build
 
 # Replace with your API
-ENV API="http://localhost:666"
+ENV API="http://localhost:3000"
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci
